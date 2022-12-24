@@ -1,0 +1,26 @@
+.navflex{
+    margin: 10px;
+    display: flex;
+    flex: 1;  
+    justify-content:flex-end;
+    
+}
+
+.buttonFirst{
+  transition-duration: 0.4s;
+  color: white;
+  background-color: #296581;
+  font-size: 20px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  
+}
+
+.buttonFirst:hover {
+  background-color: #26343a; /* Green */
+  color: white;
+  
+}
+  
