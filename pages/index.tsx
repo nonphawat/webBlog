@@ -1,51 +1,95 @@
 import Head from 'next/head'
-
+import Alert from '@mui/material/Alert';
 import styles from '../styles/Home.module.css'
-import { useState, useEffect } from 'react'
-
-import TextField from '@mui/material/TextField';
-
+import { useState, useEffect, useRef } from 'react'
+import Grid from '@mui/material/Grid';
 import * as React from 'react';
-
+import Box from '@mui/material/Box';
 import Link from 'next/link'
 import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
+import { useRouter } from 'next/router';
 
 
 
-export default function Home() {
+export default function Home(props: any) {
+  const router = useRouter();
+  const [show, setShow] = useState("none");
+  const timer = useRef<number>();
+  const logIn = async () => {
+    // Determine whether to show the component or not
+    console.log(props.walletAddress);
+
+    if (props.walletAddress == undefined) {
+
+      setShow("unset");
+      timer.current = await window.setTimeout(() => {
+        setShow("none");
+
+      }, 2500);
+
+    } else {
+      router.push("/userBlog")
+    }
+
+  }
+
+
 
   return (
     <div className={styles.main}>
-      <h1>Blue Bird</h1>
+      <h1>Write Your Content on BlueBird Blog</h1>
+      <br />
+      <br />
       <Box sx={{
-        width: 500
-      }}
-        className={styles.upDown}
-      >
+                width: 500
+            }}
 
-        <Stack
-          direction="row"
+            >
+      <Grid container spacing={3}>
+      <Grid  xs={3}>
           
-          
-          spacing={3}
-          className={styles.spaceBottom}
-        >
+        </Grid>
+        <Grid  xs={4}>
           <Button
             className={styles.buttonIndex1}
-            variant="contained">Sign Up
+            onClick={logIn}
+            variant="contained">Log in
 
           </Button>
-          <Button
-            className={styles.buttonIndex1}
-            variant="contained">Sign in
+        </Grid>
+        <Grid  >
+          <Link href={'/blogcon/'}>
+            <Button
+              className={styles.buttonIndex1}
+             
+              variant="contained">Search
 
-          </Button>
-        </Stack>
-       
+            </Button>
+          </Link>
 
+        </Grid>
+
+      </Grid>
       </Box>
+
+
+
+      
+
+
+
+
+      <br /><br />
+      <div style={{ display: show }}>
+        <Alert variant="filled" severity="warning">
+          Please Connect Your Wallet First!
+        </Alert>
+      </div>
+
+
+
+
+
 
     </div>
   )
